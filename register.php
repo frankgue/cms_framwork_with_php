@@ -33,29 +33,37 @@
             } elseif($resultEmail) {
                 $message = "Un compte est déjà attaché a l'adresse email saisie";
             }else{                
+                  
+                  require_once "includes/token.php";
+                  
+                  $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                  
                 $requete = $bdd->prepare("INSERT INTO utilisateurs(nom_utilisateur, prenom_utilisateur, username, email_utilisateur, password_utilisateur, token_utilisateur, photo_utilisateur) VALUES (:nom, :prenom, :username, :email, :password, :token, :photo_profil)");
                 
                 $requete->bindvalue(":nom", $_POST['nom']);
                 $requete->bindvalue(":prenom", $_POST['prenom']);
                 $requete->bindvalue(":username", $_POST['username']);
                 $requete->bindvalue(":email", $_POST['email']);
-                $requete->bindvalue(":password", $_POST['password']);
-                $requete->bindvalue(":token", "aaaa");
+                $requete->bindvalue(":password", $password);
+                $requete->bindvalue(":token", $token);
                 if (empty($_FILES['photo_profil']['name'])) {
                     $photo_profil = "avatar_defaut.png";
                     $requete->bindvalue(":photo_profil", $photo_profil);
                 }else{
                     if (preg_match("#jpeg|png|jpg#", $_FILES['photo_profil']['type'])) {
                         $path = "img/photo_profil/";
-                        move_uploaded_file($_FILES['photo_profil']['name'], $path.$_FILES['photo_profil']['name']);
+                        $nouveau_nom_photo = $token."_".$_FILES['photo_profil']['name'];
+                        move_uploaded_file($_FILES['photo_profil']['tmp_name'], $path.$nouveau_nom_photo);
                     } else {
                         $message = "La photo de profil doit être de type jpeg, jpg ou png!";
                     }
                     
-                    $requete->bindvalue(":photo_profil", $_FILES['photo_profil']['name']);
+                    $requete->bindvalue(":photo_profil", $nouveau_nom_photo);
                 }
                 
                 $requete->execute();
+                
+                require_once "includes/PHPMailer/sendmail.php";
             }
         }
     }

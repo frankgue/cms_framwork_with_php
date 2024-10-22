@@ -9,4 +9,4 @@
         return $token;
     }
 
-?>
+$token = token_random_string(25);
