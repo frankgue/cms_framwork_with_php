@@ -69,85 +69,93 @@
     }
 
 ?>
-    <body class="bg-primary">
-        <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
-                <main>
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header">
+
+<body class="bg-primary">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                <div class="card-header">
                                     <?php 
                                         if (isset($message)) {
                                            echo $message;
                                         }
                                     ?>
-                                    <h3 class="text-center font-weight-light my-4">Creer un compte</h3></div>
-                                    <div class="card-body">
-                                        <form action="register.php" method="post" enctype="multipart/form-data">
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputFirstName" type="text" name="prenom" />
-                                                        <label for="inputFirstName">Prénom</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating">
-                                                        <input class="form-control" id="inputLastName" type="text"  name="nom" />
-                                                        <label for="inputLastName">Nom</label>
-                                                    </div>
+                                    <h3 class="text-center font-weight-light my-4">Creer un compte</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form action="register.php" method="post" enctype="multipart/form-data">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3 mb-md-0">
+                                                    <input class="form-control" id="inputFirstName" type="text"
+                                                        name="prenom" />
+                                                    <label for="inputFirstName">Prénom</label>
                                                 </div>
                                             </div>
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" name="email" />
-                                                <label for="inputEmail">Adresse Email</label>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPassword" type="password"  name="password" />
-                                                        <label for="inputPassword">Mot de passe</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputPasswordConfirm" type="password"  name="confirm_password" />
-                                                        <label for="inputPasswordConfirm">Confirmation mot de passe</label>
-                                                    </div>
+                                            <div class="col-md-6">
+                                                <div class="form-floating">
+                                                    <input class="form-control" id="inputLastName" type="text"
+                                                        name="nom" />
+                                                    <label for="inputLastName">Nom</label>
                                                 </div>
                                             </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        <input class="form-control" id="inputUserName" type="text" name="username" />
-                                                        <label for="inputUserName">Nom d'utilisateur</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div>
-                                                        <label for="photo">Photo de profil</label>
-                                                        <input type="hidden" name="MAXX_FILE_SIZE" value="1000000">
-                                                        <input  id="photo" name="photo_profil" type="file" />
-                                                    </div>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="inputEmail" type="email" name="email" />
+                                            <label for="inputEmail">Adresse Email</label>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3 mb-md-0">
+                                                    <input class="form-control" id="inputPassword" type="password"
+                                                        name="password" />
+                                                    <label for="inputPassword">Mot de passe</label>
                                                 </div>
                                             </div>
-                                            <div class="mt-4 mb-0">
-                                                <div class="d-grid"><input type="submit" name="inscription" value="Créer un compte" class="btn btn-primary btn-block" /></div>
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3 mb-md-0">
+                                                    <input class="form-control" id="inputPasswordConfirm"
+                                                        type="password" name="confirm_password" />
+                                                    <label for="inputPasswordConfirm">Confirmation mot de passe</label>
+                                                </div>
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.php">Avez-vous un comptet? Connectez-vous</a></div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3 mb-md-0">
+                                                    <input class="form-control" id="inputUserName" type="text"
+                                                        name="username" />
+                                                    <label for="inputUserName">Nom d'utilisateur</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>
+                                                    <label for="photo">Photo de profil</label>
+                                                    <input type="hidden" name="MAXX_FILE_SIZE" value="1000000">
+                                                    <input id="photo" name="photo_profil" type="file" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 mb-0">
+                                            <div class="d-grid"><input type="submit" name="inscription"
+                                                    value="Créer un compte" class="btn btn-primary btn-block" /></div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="card-footer text-center py-3">
+                                    <div class="small"><a href="login.php">Avez-vous un comptet? Connectez-vous</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </main>
-            </div>
-            
-            
-            <?php require_once "includes/footer.php"; ?>
-            
+                </div>
+            </main>
+        </div>
+
+
+        <?php require_once "includes/footer.php"; ?>

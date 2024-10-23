@@ -96,5 +96,64 @@ function modifier_categorie(){
     }
 }
 
+function enregistrer_nouveau_article(){
+    
+    global $bdd;
+    global $token;
+    global $message;
+    
+    if (isset($_POST['ajouter_article'])) {
+        if (empty($_POST['titre_article'])) {
+            $message = "Le titre de l'article doit être une chaîne de caractères non vide";
+        }elseif (empty($_POST['mot_cles_article'])) {
+            $message = "Précisez au moins un mot clés de l'article!";
+        }elseif (empty($_POST['contenu_article'])) {
+            $message = "Le contenu de l'article doit être une chaîne de caractères non vide";
+        }elseif(empty($_POST['nom_categorie_article'])) {
+            $message = "Choisissez une catégorie a votre article";
+        }elseif(empty($_FILES['image_article']['name'])) {
+            $message = "Veuillez selectionner une image pour votre article de type jpeg, jpg ou png!";
+        }else {
+            if (preg_match("#jpeg|jpg|png#", $_FILES['image_article']['type'])) {
+                $path  = "../img/images_articles/";
+                
+                $nouveau_nom_image = $token."_".$_FILES['image_article']['name'];
+                move_uploaded_file($_FILES['image_article']['tmp_name'], $path.$nouveau_nom_image);
+                $nom_categorie_article = $_POST['nom_categorie_article'];
+                $requete_categorie = "SELECT * FROM categories WHERE nom_categorie='$nom_categorie_article'";
+                $result_categorie = $bdd->query($requete_categorie);
+                $data_categorie = $result_categorie->fetch(PDO::FETCH_ASSOC);
+                
+                $id_categorie = $data_categorie['id_categorie'];
+                $aujoudhui = date("Y-m-d");
+                $id_auteur = $_SESSION['id_utilisateur'];
+                
+                $requete = $bdd->prepare("INSERT INTO articles(titre_article, date_article, contenu_article, tags_article, image_article, id_categorie, id_auteur, status_article) VALUE(:titre_article, :date_article, :contenu_article, :tags_article, :image_article, :id_categorie, :id_auteur, :status_article)");
+                
+                $requete->bindValue(':titre_article', $_POST['titre_article']);
+                $requete->bindValue(':date_article', $aujoudhui);
+                $requete->bindValue(':contenu_article', $_POST['contenu_article']);
+                $requete->bindValue(':tags_article', $_POST['mot_cles_article']);
+                $requete->bindValue(':image_article', $nouveau_nom_image);
+                $requete->bindValue(':id_categorie', $id_categorie);
+                $requete->bindValue(':id_auteur', $id_auteur);
+                $requete->bindValue(':status_article',  "Publie");
+                
+                $result = $requete->execute();
+                
+                if (!$result) {
+                    $message = "Un problème est survenu et l'article n'a pas été soumi à la publication!";
+                } else {
+                    $message = "L'article a bien été soumi a la publication";
+                }
+            }else {
+                $message = "L'image de l'article' doit être de type jpeg, jpg ou png et sa taille ne doit pas depasser 1MO";
+            }
+          
+            
+        }
+    }
+}
+
 
 ?>

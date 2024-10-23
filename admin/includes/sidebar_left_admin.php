@@ -37,7 +37,7 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Gestion article:</h6>
-                <a class="collapse-item" href="new_article.php">Nouveau article</a>
+                <a class="collapse-item" href="ajouter_article.php">Nouveau article</a>
                 <a class="collapse-item" href="tous_article.php">Tous les articles</a>
             </div>
         </div>
